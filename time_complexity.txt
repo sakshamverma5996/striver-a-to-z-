@@ -1,0 +1,133 @@
+STRIVER A TO Z DSA — LECTURE 2
+TIME AND SPACE COMPLEXITY
+================================
+
+1. WHY COMPLEXITY MATTERS
+- Complexity helps estimate how an algorithm's resource usage grows as input size (n) increases.
+- Time complexity: growth in the number of operations / running time.
+- Space complexity: growth in extra memory used by an algorithm.
+- We usually analyze growth, not exact seconds or bytes, because hardware and implementation differ.
+
+2. INPUT SIZE (n)
+- n represents the size of the input.
+- Example: for an array with 100 elements, n = 100.
+- Always identify what n means before analyzing an algorithm.
+
+3. TIME COMPLEXITY: COMMON CASES
+- O(1) — Constant: work stays roughly the same as n grows.
+  Example: access arr[0].
+- O(log n) — Logarithmic: input/search space shrinks by a constant factor each step.
+  Example: binary search in a sorted array.
+- O(n) — Linear: work grows proportionally to n.
+  Example: traverse an array once.
+- O(n log n) — Linearithmic: often appears in efficient comparison sorting.
+  Example: merge sort.
+- O(n^2) — Quadratic: often caused by two nested loops, each running n times.
+  Example: compare every pair using nested loops.
+- O(2^n) — Exponential: work roughly doubles when n increases by 1.
+  Example: some brute-force subset/recursion algorithms.
+- O(n!) — Factorial: explores permutations; grows extremely quickly.
+  Example: generating all permutations.
+
+Typical growth order, from smaller to larger:
+O(1) < O(log n) < O(n) < O(n log n) < O(n^2) < O(2^n) < O(n!)
+
+4. BIG-O, OMEGA AND THETA
+- Big-O, O(f(n)): asymptotic upper bound; commonly used to describe worst-case growth.
+- Big-Omega, Ω(f(n)): asymptotic lower bound.
+- Big-Theta, Θ(f(n)): tight asymptotic bound when upper and lower bounds match.
+- In interviews and DSA discussions, people often say “Big-O” when discussing complexity; state the case/bound precisely when needed.
+
+5. HOW TO ANALYZE LOOPS
+A. One loop:
+    for i = 0 to n-1:
+        do constant work
+  Runs n times => O(n).
+
+B. Two separate loops:
+    loop n times
+    loop n times
+  Total work = n + n = 2n => O(n), not O(n^2).
+
+C. Nested loops:
+    for i = 0 to n-1:
+        for j = 0 to n-1:
+            do constant work
+  Total work = n * n => O(n^2).
+
+D. Loop that halves/doubles:
+    i = 1
+    while i < n:
+        i = i * 2
+  Number of iterations is about log2(n) => O(log n).
+
+E. Triangular nested loop:
+    for i = 0 to n-1:
+        for j = 0 to i:
+            do constant work
+  Work = 1 + 2 + ... + n = n(n+1)/2 => O(n^2).
+
+6. DROP CONSTANTS AND LOWER-ORDER TERMS
+- O(2n) becomes O(n).
+- O(3n^2 + 5n + 10) becomes O(n^2).
+- Keep the term that grows fastest for large n.
+- This simplification is for asymptotic growth, not exact operation counts.
+
+7. BEST, AVERAGE AND WORST CASE
+- Best case: least work for an input of size n.
+- Average case: expected work over an assumed input distribution.
+- Worst case: most work for an input of size n.
+- Example: linear search:
+  Best case O(1): target is first.
+  Worst case O(n): target is last or absent.
+  Average case O(n) under common assumptions.
+
+8. SPACE COMPLEXITY
+- Total space may include input storage and auxiliary (extra) space; clarify which one is being reported.
+- Auxiliary space: extra memory used by the algorithm, often excluding the input.
+- A few variables regardless of n => O(1) auxiliary space.
+- A new array of n elements => O(n) auxiliary space.
+- A 2D n-by-n table => O(n^2) space.
+- Recursive calls use a call stack:
+  Recursion depth n => typically O(n) stack space.
+  Recursion depth log n => typically O(log n) stack space.
+- Do not confuse total memory with auxiliary space.
+
+9. QUICK EXAMPLES
+- Read arr[k]: Time O(1), auxiliary space O(1).
+- Find maximum in an array: Time O(n), auxiliary space O(1).
+- Copy an array of n elements: Time O(n), extra space O(n).
+- Binary search (iterative): Time O(log n), auxiliary space O(1).
+- Merge sort on an array: Time O(n log n), extra space typically O(n) for the standard array implementation.
+
+10. ANALYSIS CHECKLIST
+1. Define n.
+2. Count how many times the main operation runs.
+3. For nested loops, multiply iteration counts when independent; for dependent loops, form a sum.
+4. For halving/doubling, think logarithmic.
+5. Simplify by removing constants and lower-order terms.
+6. Analyze auxiliary space separately, including recursion stack.
+7. State best/average/worst case if relevant.
+
+COMMON MISTAKES
+- Two consecutive loops are usually O(n), not O(n^2).
+- Nested loops are not automatically O(n^2); inspect their bounds.
+- O(log n) usually comes from repeatedly dividing/multiplying by a constant factor.
+- Big-O does not tell exact runtime in seconds.
+- Space complexity is not always the same as input size.
+
+PRACTICE
+1. One loop from 0 to n-1: time complexity?
+2. Two nested loops, each from 0 to n-1: time complexity?
+3. A loop starts at 1 and doubles i until i >= n: time complexity?
+4. Find the maximum element in an array: time and auxiliary space?
+5. What is the simplified complexity of 4n^2 + 3n + 20?
+
+ANSWERS
+1. O(n)
+2. O(n^2)
+3. O(log n)
+4. O(n) time, O(1) auxiliary space
+5. O(n^2)
+
+Note: These are concise study notes for the topic “Time and Space Complexity” in Striver's A to Z DSA Lecture 2, not a verbatim transcript.
